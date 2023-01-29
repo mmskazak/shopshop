@@ -1,6 +1,6 @@
 <?php
 
-use App\Logging\TelegramLoggerHandler;
+use App\Logging\Telegram\TelegramLoggerFactory;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -121,9 +121,9 @@ return [
 
         'telegram' => [
             'driver' => 'custom',
-            'via' => TelegramLoggerHandler::class,
-            'chan_id' => '',
-            'token' => ''
+            'via' => TelegramLoggerFactory::class,
+            'chat_id' => '194615184',
+            'token' => '5809438164:AAFNqDvQzXabWIwgYii0z2HoIzjW2ssCmTo',
         ],
     ],
 
