@@ -30,8 +30,17 @@ class AppServiceProvider extends ServiceProvider {
         Model::preventSilentlyDiscardingAttributes(!app()->isProduction());
 
         DB::whenQueryingForLongerThan(
-            CarbonInterval::seconds(4),
+            CarbonInterval::seconds(3),
             static function(Connection $connection) {
+                //
+            }
+        );
+
+        $kernel = app(Kernel::class);
+
+        $kernel->whenRequestLifecycleIsLongerThan(
+            CarbonInterval::seconds(4),
+            static function() {
                 //
             }
         );
