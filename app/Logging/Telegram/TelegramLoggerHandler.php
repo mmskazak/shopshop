@@ -12,13 +12,13 @@ class TelegramLoggerHandler extends AbstractProcessingHandler {
 
     protected string $token;
 
-    public function __construct() {
-        $level = Logger::toMonologLevel('debug');
+    public function __construct(string $level, string $token, string $chatId) {
+        $level = Logger::toMonologLevel($level);
 
         parent::__construct($level);
 
-        $this->token = config('logging.channels.telegram.token');
-        $this->chatId = config('logging.channels.telegram.chat_id');
+        $this->token = $token;
+        $this->chatId = $chatId;
     }
 
     protected function write(array $record): void {

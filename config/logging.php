@@ -124,6 +124,7 @@ return [
             'via' => TelegramLoggerFactory::class,
             'chat_id' => '194615184',
             'token' => '5809438164:AAFNqDvQzXabWIwgYii0z2HoIzjW2ssCmTo',
+            'level' => env('LOG_LEVEL', 'debug'),
         ],
     ],
 
