@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Brand::factory(10)->create();
+        $categories = Category::factory(10)->create();
 
-        Category::factory(10)
-            ->has(Product::factory(rand(10,20)))
-            ->create();
+        foreach ($categories as $category) {
+            $category->products()->saveMany(
+                Product::factory(rand(5,10))->make()
+            );
+        }
     }
 }
