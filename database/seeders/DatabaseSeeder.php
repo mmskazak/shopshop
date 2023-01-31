@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Brand::factory(10)->create();
+
         $categories = Category::factory(10)->create();
 
         foreach ($categories as $category) {
