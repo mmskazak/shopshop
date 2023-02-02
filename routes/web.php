@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     //throw new Exception('My first Sentry error!');
-    //logger()->channel('telegram')->debug('Hello world!');
+    logger()->channel('telegram')->debug('Hello world!');
     return view('welcome');
 });

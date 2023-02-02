@@ -10,14 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register() {
-        //
-    }
 
     /**
      * Bootstrap any application services.
@@ -29,16 +21,15 @@ class AppServiceProvider extends ServiceProvider {
         Model::preventLazyLoading(!app()->isProduction());
         Model::preventSilentlyDiscardingAttributes(!app()->isProduction());
 
-        DB::whenQueryingForLongerThan(
-            CarbonInterval::seconds(3),
-            static function(Connection $connection) {
-                //
+        DB::listen(function ($query){
+            if ($query->time > CarbonInterval::second()) {
+                logger()
+                    ->channel('telegram')
+                    ->debug('Long query: ' . $query->sql, $query->bindings);
             }
-        );
+        });
 
-        $kernel = app(Kernel::class);
-
-        $kernel->whenRequestLifecycleIsLongerThan(
+        app(Kernel::class)->whenRequestLifecycleIsLongerThan(
             CarbonInterval::seconds(4),
             static function() {
                 //
