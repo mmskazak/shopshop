@@ -23,7 +23,7 @@ class TelegramBotApi
 
             $isSendMessage = $response['ok'] ?? false;
         } catch (\Throwable $e) {
-            report(throw new TelegramBotApiException($e->getMessage()));
+            report(new TelegramBotApiException($e->getMessage()));
 
             //TODO если вылетит исключение в этом не будет ни какого смысла
             $isSendMessage = false;
