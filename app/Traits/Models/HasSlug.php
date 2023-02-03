@@ -22,7 +22,7 @@ trait HasSlug
                 $isExistSlug = $model::query()->where('slug',$newSlug)->exists();
 
                 if($isExistSlug) {
-                   return $generateNewSlug($nameField,++$counter);
+                   return $newSlug . $generateNewSlug($nameField,++$counter);
                 }
 
                 return $newSlug;
