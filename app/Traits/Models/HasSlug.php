@@ -11,7 +11,6 @@ trait HasSlug
 
     protected static function bootHasSlug()
     {
-        parent::boot();
 
         static::creating(function (Model $model)
         {
