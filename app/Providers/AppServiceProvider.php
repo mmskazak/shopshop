@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider {
         Model::preventSilentlyDiscardingAttributes(!app()->isProduction());
 
         DB::listen(function ($query){
-            if ($query->time > CarbonInterval::second()) {
+            if ($query->time > 100) {
                 logger()
                     ->channel('telegram')
                     ->debug('Long query: ' . $query->sql, $query->bindings);

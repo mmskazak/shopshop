@@ -26,10 +26,9 @@ return new class extends Migration
                 ->nullable()
                 ->constrained()
                 ->cascadeOnUpdate()
-                ->nullOnDelete();
+                ->onDelete('set null');
             $table->timestamps();
         });
-
 
         Schema::create('category_product', function (Blueprint $table) {
             $table->id();
@@ -54,6 +53,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('products');
-        Schema::dropIfExists('category_product');
+        //Schema::dropIfExists('category_product');
     }
 };
