@@ -18,12 +18,24 @@ class RandomImageCopyTest extends TestCase
     {
         parent::setUp();
 
-//        if this use in phpunit test
-//        $this->faker = Factory::create();
-//        $this->faker->addProvider(new ImageLocalFakerProvider($this->faker));
+        //if this use in phpunit test
+        //$this->faker = Factory::create();
+        //$this->faker->addProvider(new ImageLocalFakerProvider($this->faker));
 
         $this->path_from = base_path('tests/Fixtures/images/products');
         $this->path_to = storage_path('app/public/images/products');
+
+        //for add to remove
+        $this->test_images = [];
+    }
+
+    private function deleteTestingFileIfExists($file_path): bool
+    {
+        if (file_exists($file_path)) {
+            return unlink($file_path);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -41,7 +53,9 @@ class RandomImageCopyTest extends TestCase
         $nameFile = $this->faker->copyRandomImage($this->path_from, $this->path_to, true);
 
         $this->assertFileExists($this->path_to . '/' . $nameFile);
+        $this->deleteTestingFileIfExists($this->path_to . '/' . $nameFile);
     }
+
 //
 //    public function testCopyRandomFileWithOnlyFileName()
 //    {
