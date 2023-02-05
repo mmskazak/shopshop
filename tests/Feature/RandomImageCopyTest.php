@@ -1,15 +1,29 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use App\Providers\FakerExtension\ImageLocalFakerProvider;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\WithFaker;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class RandomImageCopyTest extends TestCase
 {
     use WithFaker;
+
+    private string $path_to;
+    private string $path_from;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->faker = Factory::create();
+        $this->faker->addProvider(new ImageLocalFakerProvider($this->faker));
+
+        $this->path_from = base_path('tests/Fixtures/images/products');
+        $this->path_to = storage_path('app/public/images/products');
+    }
 
     /**
      * A basic test example.
@@ -23,14 +37,9 @@ class RandomImageCopyTest extends TestCase
 
     public function testCopyRandomFileWithRelativePath()
     {
-        $faker = $this->makeFaker();
+        $path = $this->faker->copyRandomImage($this->path_from, $this->path_to);
 
-        $src = __DIR__ . '/src';
-        $dst = __DIR__ . '/dst';
-
-        $path = $faker->copyRandomImage($src, $dst);
-
-        $this->assertFileExists($dst . '/' . $path);
+        $this->assertFileExists($this->path_to . '/' . $path);
     }
 //
 //    public function testCopyRandomFileWithOnlyFileName()
