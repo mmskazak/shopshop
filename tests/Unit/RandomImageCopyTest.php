@@ -23,7 +23,6 @@ class RandomImageCopyTest extends TestCase
 
     public function testCopyRandomFileWithRelativePath()
     {
-
         $faker = $this->makeFaker();
 
         $src = __DIR__ . '/src';
