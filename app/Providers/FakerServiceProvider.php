@@ -16,7 +16,7 @@ class FakerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Generator::class, function ($app) {
+        $this->app->singleton(Generator::class, function ($app) {
 
             $faker = Factory::create();
             $faker->addProvider(new ImageLocalFakerProvider($faker));
