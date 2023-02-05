@@ -18,8 +18,9 @@ class RandomImageCopyTest extends TestCase
     {
         parent::setUp();
 
-        $this->faker = Factory::create();
-        $this->faker->addProvider(new ImageLocalFakerProvider($this->faker));
+//        if this use in phpunit test
+//        $this->faker = Factory::create();
+//        $this->faker->addProvider(new ImageLocalFakerProvider($this->faker));
 
         $this->path_from = base_path('tests/Fixtures/images/products');
         $this->path_to = storage_path('app/public/images/products');
@@ -37,9 +38,9 @@ class RandomImageCopyTest extends TestCase
 
     public function testCopyRandomFileWithRelativePath()
     {
-        $path = $this->faker->copyRandomImage($this->path_from, $this->path_to);
+        $nameFile = $this->faker->copyRandomImage($this->path_from, $this->path_to, true);
 
-        $this->assertFileExists($this->path_to . '/' . $path);
+        $this->assertFileExists($this->path_to . '/' . $nameFile);
     }
 //
 //    public function testCopyRandomFileWithOnlyFileName()
