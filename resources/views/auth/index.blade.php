@@ -7,7 +7,7 @@
     <div class="max-w-[640px] mt-12 mx-auto p-6 xs:p-8 md:p-12 2xl:p-16 rounded-[20px] bg-purple">
         <h1 class="mb-5 text-lg font-semibold">Вход в аккаунт</h1>
         <form class="space-y-3 mb-2">
-            <input type="email" class="w-full h-14 px-4 rounded-lg border border-[#A07BF0] bg-white/20 focus:border-pink focus:shadow-[0_0_0_2px_#EC4176] outline-none transition text-white placeholder:text-white text-xxs md:text-xs font-semibold" placeholder="E-mail" required>
+            <x-forms.text-input type="email" placeholder="Email" required></x-forms.text-input>
             <input type="password" class="w-full h-14 px-4 rounded-lg border border-[#A07BF0] bg-white/20 focus:border-pink focus:shadow-[0_0_0_2px_#EC4176] outline-none transition text-white placeholder:text-white text-xxs md:text-xs font-semibold" placeholder="Пароль" required>
             <button type="submit" class="w-full btn btn-pink">Войти</button>
         </form>
