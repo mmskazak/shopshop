@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\FakerServiceProvider;
+use App\Providers\ViewServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -194,7 +196,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        \App\Providers\FakerServiceProvider::class
+
+        FakerServiceProvider::class,
+        ViewServiceProvider::class
 
     ],
 

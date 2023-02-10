@@ -18,3 +18,7 @@ Route::get('/', function () {
     logger()->channel('telegram')->debug('Hello world!');
     return view('welcome');
 })->name('home');
+
+Route::get('/login', function () {
+    return view('auth.index');
+})->name('login');
