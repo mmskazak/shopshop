@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //throw new Exception('My first Sentry error!');
-    logger()->channel('telegram')->debug('Hello world!');
-    return view('welcome');
-})->name('home');
+Route::controller(AuthController::class)->group(function() {
+    Route::get('/login', 'index')->name('login');
+    Route::post( '/login', 'signIn')->name('signIn');
 
-Route::get('/login', function () {
-    return view('auth.index');
-})->name('login');
+    Route::get('/sign-up', 'signUp')->name('signUp');
+    Route::post('/sign-up', 'signUpStore')->name('signUpStore');
+
+    Route::delete('/logout', 'logOut')->name('logOut');
+
+    Route::get('/forgot-password ', 'forgot ')->middleware('guest')->name('password.request');
+    Route::post('/forgot-password ', 'forgotPassword ')->middleware('guest')->name('password.email');
+
+    Route::get('/reset-password/{token}', 'reset')->middleware('guest')->name('password.reset');
+    Route::post('/reset-password', 'resetPassword')->middleware('guest')->name('password.update');
+});
+
+Route::get('/', HomeController::class)->name('home')->name('password.request');
+
+

@@ -1,3 +1,3 @@
-4<div>
-    <!-- Simplicity is the consequence of refined emotions. - Jean D'Alembert -->
-</div>
+<button type="submit" class="w-full btn btn-pink">
+    {{ $slot }}
+</button>
